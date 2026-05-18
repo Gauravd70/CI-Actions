@@ -1,0 +1,25 @@
+name: 'Generate maven settings.xml'
+description: 'Creates Maven settings.xml for Artifactory authentication'
+
+inputs:
+  username:
+    required: true
+  password:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        cat > ~/.m2/settings.xml <<EOF
+        <settings>
+          <servers>
+            <server>
+              <id>artifactory</id>
+              <username>${{ inputs.username }}</username>
+              <password>${{ inputs.password }}</password>
+            </server>
+          </servers>
+        </settings>
+        EOF
+      shell: bash
