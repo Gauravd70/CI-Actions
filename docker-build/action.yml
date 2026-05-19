@@ -6,10 +6,13 @@ inputs:
     required: true
   tag:
     required: true
+  context:
+    required: false
+    default: '.'
 
 runs:
   using: 'composite'
   steps:
     - name: Docker build
       shell: bash
-      run: docker build -t ${{ inputs.image }}:${{ inputs.tag }} .
+      run: docker build -t ${{ inputs.image }}:${{ inputs.tag }} ${{ inputs.context }}
