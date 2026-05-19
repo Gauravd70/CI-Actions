@@ -9,7 +9,7 @@ inputs:
     required: true
     
 runs:
-  uses: 'composite'
+  using: 'composite'
   steps:
     - name: 'k8s rollout status'
       shell: bash
