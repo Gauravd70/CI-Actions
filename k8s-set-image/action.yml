@@ -14,7 +14,7 @@ inputs:
 
 runs:
   using: 'composite'
-  runs:
+  steps:
     - name: 'Set Image'
       shell: bash
       run: kubectl set image deployment/${{ inputs.deployment }} ${{ inputs.deployment }}=${{ inputs.image }}:${{ inputs.tag }} -n ${{ inputs.ns }}
