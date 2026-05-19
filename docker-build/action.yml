@@ -1,0 +1,15 @@
+name: 'Docker Build'
+description: 'Build the docker image using Dockerfile'
+
+inputs:
+  image:
+    required: true
+  tag:
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Docker build
+      shell: bash
+      run: docker build -t ${{ inputs.image }}:${{ inputs.tag }} .

@@ -1,0 +1,20 @@
+name: 'k8s set image'
+description: 'Update the image to be used by the deployment'
+
+inputs:
+  ns:
+    required: false
+    default: 'default'
+  deployment:
+    required: true
+  image:
+    required: true
+  tag:
+    required: true
+
+runs:
+  using: 'composite'
+  runs:
+    - name: 'Set Image'
+      shell: bash
+      run: kubectl set image deployment/${{ inputs.deployment }} ${{ inputs.deployment }}=${{ inputs.image }}:${{ inputs.tag }} -n ${{ inputs.ns }}

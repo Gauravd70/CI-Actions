@@ -1,0 +1,16 @@
+name: 'k8s rollout status'
+description: 'Rollout the deployment with the updated configurations'
+
+inputs:
+  ns:
+    required: false
+    default: 'default'
+  deployment:
+    required: true
+    
+runs:
+  uses: 'composite'
+  steps:
+    - name: 'k8s rollout status'
+      shell: bash
+      run: kubectl rollout status deployment/${{ inputs.deployment }} -n ${{ inputs.ns }}

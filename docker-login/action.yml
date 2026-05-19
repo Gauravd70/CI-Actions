@@ -1,0 +1,16 @@
+name: 'DockerHub Login'
+description: 'Login to DockerHub repository'
+
+inputs:
+  username:
+    required: true
+  password:
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Login to DockerHub
+      shell: bash
+      run: echo "${{ inputs.password }}" | docker login -u "${{ inputs.username }}" --password-stdin
+      

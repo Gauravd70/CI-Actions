@@ -1,0 +1,16 @@
+name: 'Docker Push'
+description: 'Push the image to repository'
+
+inputs:
+  image:
+    required: true
+  tag:
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Docker push
+      shell: bash
+      run: docker push ${{ inputs.image }}:${{ inputs.tag }}
+      

@@ -1,0 +1,20 @@
+name: 'k8s deploy'
+description: 'Deploy to k8s cluster'
+
+inputs:
+  ns:
+    required: false
+    default: 'default'
+  k:
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Create namespace if not exists
+      shell: bash
+      run: kubectl get ns "${{ inputs.ns }}" || kubectl create ns "${{ inputs.ns }}" 
+    
+    - name: Deploy using kustomize
+      shell: bash
+      run: kubectl apply -n "${{ inputs.ns }}" -k "${{ inputs.k }}"
