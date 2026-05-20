@@ -15,4 +15,4 @@ runs:
   steps:
     - name: Docker build
       shell: bash
-      run: docker build -t ${{ inputs.image }}:${{ inputs.tag }} ${{ inputs.context }}
+      run: docker build -t ${{ inputs.image }}:${{ inputs.tag }} -t ${{ inputs.image }}:latest  ${{ inputs.context }}
