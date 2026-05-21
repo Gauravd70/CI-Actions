@@ -7,6 +7,8 @@ inputs:
     default: 'default'
   deployment:
     required: true
+  container:
+    required: true
   image:
     required: true
   tag:
@@ -17,4 +19,4 @@ runs:
   steps:
     - name: 'Set Image'
       shell: bash
-      run: kubectl set image deployment/${{ inputs.deployment }} ${{ inputs.deployment }}=${{ inputs.image }}:${{ inputs.tag }} -n ${{ inputs.ns }}
+      run: kubectl set image deployment/${{ inputs.deployment }} ${{ inputs.container }}=${{ inputs.image }}:${{ inputs.tag }} -n ${{ inputs.ns }}
