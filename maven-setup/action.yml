@@ -1,0 +1,23 @@
+name: 'Setup maven'
+description: 'Setup maven for github runner VM'
+
+inputs:
+  cacert:
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install mkcert CA into Java truststore
+      shell: bash
+      run: |
+        echo "${{ inputs.cacert }}" | base64 -d > rootCA.pem
+
+        JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+
+        sudo keytool -importcert \
+          -alias mkcert-root \
+          -file rootCA.pem \
+          -keystore "$JAVA_HOME/lib/security/cacerts" \
+          -storepass changeit \
+          -noprompt
