@@ -15,7 +15,7 @@ runs:
 
         JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
 
-        sudo keytool -importcert \
+        sudo -n keytool -importcert \
           -alias mkcert-root \
           -file rootCA.pem \
           -keystore "$JAVA_HOME/lib/security/cacerts" \
